@@ -6,32 +6,32 @@ class PlayerManager extends AbstractManager{
         parent::__construct();
     }
 
-    public function update(Player $player) : Player {
-        $query = $this->db->prepare("UPDATE players SET nickname=:nickname, bio=:bio, portrait=:portrait, team=:team WHERE id=:id");
-        $parameters = [
-            'id' => $player->getId(),
-            'nickname' => $player->getNickname(),
-            'bio' => $player->getBio(),
-            'portrait' => $player->getPortrait(),
-            'team' =>> $player->getTeam()
-        ];
+    // public function update(Player $player) : Player {
+    //     $query = $this->db->prepare("UPDATE players SET nickname=:nickname, bio=:bio, portrait=:portrait, team=:team WHERE id=:id");
+    //     $parameters = [
+    //         'id' => $player->getId(),
+    //         'nickname' => $player->getNickname(),
+    //         'bio' => $player->getBio(),
+    //         'portrait' => $player->getPortrait(),
+    //         'team' => $player->getTeam()
+    //     ];
 
-        $query->execute($parameters);
+    //     $query->execute($parameters);
 
-        $player = new Player($player->getNickname(), $player->getBio(), $player->getPortrait(), $player->getTeam(), $player->getId());
+    //     $player = new Player($player->getNickname(), $player->getBio(), $player->getPortrait(), $player->getTeam(), $player->getId());
 
-        return $player;
+    //     return $player;
 
-    }
+    // }
 
-    public function delete(player $player) : void {
-        $query = $this->db->prepare("DELETE FROM players WHERE id=:id");
-        $parameters = [
-            "id" => $player->getId()
-        ];
+    // public function delete(player $player) : void {
+    //     $query = $this->db->prepare("DELETE FROM players WHERE id=:id");
+    //     $parameters = [
+    //         "id" => $player->getId()
+    //     ];
 
-        $query->execute($parameters);
-    }
+    //     $query->execute($parameters);
+    // }
 
     public function findOne(int $id) : Player {
         $query = $this->db->prepare("SELECT * FROM players WHERE id=:id");
@@ -42,7 +42,7 @@ class PlayerManager extends AbstractManager{
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
         
-        $player = new Player($result['firstName'], $result['lastName'], $result['email'], $result['password'], new DateTime($result['created_at']));
+        $player = new Player($result['nickname'], $result['bio'], $result['portrait'], $result['team'], $result['id']);
 
         return $player;
     }

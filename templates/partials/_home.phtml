@@ -5,3 +5,40 @@
         <h3>Les players, les teams et l'actu des matchs</h3>
     </div>
 </main>
+<section>
+    <h2>LA TEAM À LA UNE</h2>
+    <div id="all">
+
+        <?php
+        $team_m = new TeamManager();
+        $owl = $team_m->findOne(1);
+
+        $team_m->addPlayers($owl);
+
+        $media_m = new MediaManager();
+
+        $logo_owl = $media_m->afficher($owl->getLogo());
+        ?>
+
+        <div id="owl"><img src="<?= $logo_owl['url'] ?>" alt="<?= $logo_owl['alt'] ?>"></div>
+
+        <div id="sub-all">
+
+            <div id="sub-title"><?= $owl->getName() ?><p>Les players</p></div>
+
+            <div id="player">
+
+                <?php foreach($owl->getPlayers() as $player){ ?>
+
+                    <div class="player"><img src="<?= $media_m->afficher($player->getPortrait())['url'] ?>" alt="<?= $media_m->afficher($player->getPortrait())['alt'] ?>"><legend><?= mb_strtoupper($player->getNickname(), 'UTF-8') ?></legend></div> <!-- 11/14/15 -->
+
+                <?php } ?>
+            </div>
+        </div>
+
+    </div>
+</section>
+<div>
+    <h2>LES PLAYERS À LA UNE</h2>
+</div>
+    

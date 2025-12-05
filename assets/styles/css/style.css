@@ -3,14 +3,14 @@
     --darkGrey : #1c2541;
     --yellow : #d4b52f;
     --green: #509d77;
-    --pink : #d:97ab5;
+    --pink : #d97ab5;
     --blue : #45a0ec;
     --purple : #9e87cb;
     --red : #d66f75;
     --grey : #83a1bb;
     --white : #ffffff;
     color: white;
-    font-family: 'Roboto', 'Ubuntu';
+    font-family: 'Ubuntu', 'Roboto';
 }
 *{
     margin: 0%;
@@ -43,10 +43,87 @@ header>#nav{
 
 main>#background{
     position: absolute;
-    margin: 0%;
     width: 100%;
     z-index: -1;
 }
 main>#text>h2, main>#text>h3{
     text-align: center;
+    padding: 5% 0;
+    font-size: 2rem;
+    font-weight: 400;
+}
+main>#text>h2{
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+}
+
+section{
+    background-color: var(--darkerGrey);
+    z-index: 1;
+    width: 100%;
+    height: auto;
+}
+section>h2{
+    padding-top: 1%;
+    text-decoration: underline;
+    color: var(--yellow);
+    font-weight: 900;
+    font-size: 1.5rem;
+    text-align: center;                /* Meilleur site MDN de doc html css */
+    text-decoration-thickness: 2px; /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-decoration-thickness */
+    text-underline-offset: 10px; /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-underline-offset */
+}
+section>#all{
+    margin: 2% 2% 0% 2%;
+    border: solid 2px var(--darkGrey);
+    width: 90%;
+    display: flex;
+    padding: 3%;
+}
+section>#all>#owl{
+    width: 65%;
+    margin-right: 10%;
+}
+section>#all>#owl>img{
+    width: 100%;
+    margin: 0;
+}
+section>#all>#sub-all{
+    margin-left: 0%;
+}
+section>#all>#sub-all>#sub-title{
+    color: var(--yellow);
+    font-weight: 700; font-size: 1.3rem;
+}
+section>#all>#sub-all>#sub-title>p{
+    color: var(--white);
+    font-weight: 600; font-size: 0.9rem;
+    margin: 2% 0;
+}
+section>#all>#sub-all>#player{
+    display: flex;
+}
+section>#all>#sub-all>#player>.player{
+    width: 50%;
+}
+section>#all>#sub-all>#player>.player>img{
+    width: 50%;
+}
+section>#all>#sub-all>#player>.player>legend{
+    margin-top: 1%; margin-left: 25%;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--pink);
+}
+h2{
+    padding-top: 5%;
+    text-decoration: underline;
+    color: var(--pink);
+    font-weight: 900;
+    font-size: 1.5rem;
+    text-align: center;                /* Meilleur site MDN de doc html css */
+    text-decoration-thickness: 2px; /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-decoration-thickness */
+    text-underline-offset: 10px; /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-underline-offset */
 }

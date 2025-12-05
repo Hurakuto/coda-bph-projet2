@@ -2,6 +2,8 @@
 
 class Player {
 
+    
+
     public function __construct(private string $nickname, private string $bio, private int $portrait, private int $team, private ?int $id=NULL){}
 
     public function getNickname(){
