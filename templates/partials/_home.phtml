@@ -5,40 +5,55 @@
         <h3>Les players, les teams et l'actu des matchs</h3>
     </div>
 </main>
-<section>
+<section id="team_a_la_une">
     <h2>LA TEAM À LA UNE</h2>
     <div id="all">
 
-        <?php
-        $team_m = new TeamManager();
-        $owl = $team_m->findOne(1);
-
-        $team_m->addPlayers($owl);
-
-        $media_m = new MediaManager();
-
-        $logo_owl = $media_m->afficher($owl->getLogo());
-        ?>
-
-        <div id="owl"><img src="<?= $logo_owl['url'] ?>" alt="<?= $logo_owl['alt'] ?>"></div>
+        <div id="owl"><img src="<?= $data['team']['logo_url'] ?>" alt="<?= $data['team']['logo_alt'] ?>"></div>
 
         <div id="sub-all">
 
-            <div id="sub-title"><?= $owl->getName() ?><p>Les players</p></div>
+            <div id="sub-title"><?= $data['team']['name'] ?>
+                <p>Les players</p>
+            </div>
 
             <div id="player">
 
-                <?php foreach($owl->getPlayers() as $player){ ?>
+                <?php foreach ($data['team']['players'] as $player) { ?>
 
-                    <div class="player"><img src="<?= $media_m->afficher($player->getPortrait())['url'] ?>" alt="<?= $media_m->afficher($player->getPortrait())['alt'] ?>"><legend><?= mb_strtoupper($player->getNickname(), 'UTF-8') ?></legend></div> <!-- 11/14/15 -->
+                    <div class="player"><img src="<?= $player['portrait_url'] ?>" alt="<?= $player['portrait_alt'] ?>">
+                        <legend><?= $player['name'] ?></legend>
+                    </div>
 
                 <?php } ?>
             </div>
         </div>
+    </div>
+</section>
+
+<section id="player_a_la_une">
+    <h2>LES PLAYERS À LA UNE</h2>
+    <div>
+        <?php
+        foreach ($data['players'] as $player) {
+            ?>
+            <div>
+                <img src="<?= $player['portrait_url'] ?>" alt="<?= $player['portrait_alt'] ?>">
+                <div>
+                    <legend><?= $player['name'] ?></legend>
+                    <h4><?= $player['team_name'] ?></h4>
+                </div>
+            </div>
+        <?php } ?>
 
     </div>
 </section>
-<div>
-    <h2>LES PLAYERS À LA UNE</h2>
-</div>
-    
+<section id="dernier_match">
+    <h2>LE DERNIER MATCH</h2>
+    <h3 class="versus"><?= $data['match']['name'] ?></h3>
+    <h5><?= $data['match']['date'] ?></h5>
+    <div>
+        <img id="first_team" src="<?= $data['match']['teams']['winner']['logo_url'] ?>" alt="<?= $data['match']['teams']['winner']['logo_alt'] ?>">
+        <img id="second_team" src="<?= $data['match']['teams']['loser']['logo_url'] ?>" alt="<?= $data['match']['teams']['loser']['logo_alt'] ?>">
+    </div>
+</section>

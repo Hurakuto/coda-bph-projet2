@@ -30,6 +30,7 @@ a {
 }
 
 header>div>a>h1{
+    font-size: clamp(0.1em, 4vw, 2.5em);
     text-align: center;
     padding-top: 1%;
     padding-bottom: 2%;
@@ -59,13 +60,14 @@ main>#text>h2{
     text-decoration: none;
 }
 
-section{
+#team_a_la_une{
     background-color: var(--darkerGrey);
     z-index: 1;
     width: 100%;
     height: auto;
+    padding-bottom: 2%;
 }
-section>h2{
+#team_a_la_une>h2{
     padding-top: 1%;
     text-decoration: underline;
     color: var(--yellow);
@@ -75,50 +77,50 @@ section>h2{
     text-decoration-thickness: 2px; /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-decoration-thickness */
     text-underline-offset: 10px; /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-underline-offset */
 }
-section>#all{
+#team_a_la_une>#all{
     margin: 2% 2% 0% 2%;
     border: solid 2px var(--darkGrey);
     width: 90%;
     display: flex;
     padding: 3%;
 }
-section>#all>#owl{
+#team_a_la_une>#all>#owl{
     width: 65%;
     margin-right: 10%;
 }
-section>#all>#owl>img{
+#team_a_la_une>#all>#owl>img{
     width: 100%;
     margin: 0;
 }
-section>#all>#sub-all{
+#team_a_la_une>#all>#sub-all{
     margin-left: 0%;
 }
-section>#all>#sub-all>#sub-title{
+#team_a_la_une>#all>#sub-all>#sub-title{
     color: var(--yellow);
     font-weight: 700; font-size: 1.3rem;
 }
-section>#all>#sub-all>#sub-title>p{
+#team_a_la_une>#all>#sub-all>#sub-title>p{
     color: var(--white);
     font-weight: 600; font-size: 0.9rem;
     margin: 2% 0;
 }
-section>#all>#sub-all>#player{
+#team_a_la_une>#all>#sub-all>#player{
     display: flex;
 }
-section>#all>#sub-all>#player>.player{
+#team_a_la_une>#all>#sub-all>#player>.player{
     width: 50%;
 }
-section>#all>#sub-all>#player>.player>img{
+#team_a_la_une>#all>#sub-all>#player>.player>img{
     width: 50%;
 }
-section>#all>#sub-all>#player>.player>legend{
+#team_a_la_une>#all>#sub-all>#player>.player>legend{
     margin-top: 1%; margin-left: 25%;
     font-size: 0.8rem;
     font-weight: 700;
     color: var(--pink);
 }
 h2{
-    padding-top: 5%;
+    padding-top: 1%;
     text-decoration: underline;
     color: var(--pink);
     font-weight: 900;
@@ -126,4 +128,104 @@ h2{
     text-align: center;                /* Meilleur site MDN de doc html css */
     text-decoration-thickness: 2px; /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-decoration-thickness */
     text-underline-offset: 10px; /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-underline-offset */
+}
+#player_a_la_une{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#player_a_la_une>div{
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#player_a_la_une>div>div{
+    width: 25vw;
+    padding: 0 4%;
+    display: grid;
+    place-items: center;
+    font-family: 'Roboto';
+}
+#player_a_la_une>div>div>img{
+    width: 100%;
+}
+#player_a_la_une>div>div>div>legend, #player_a_la_une>div>div>div>h4{
+    text-align: center;
+    color: var(--yellow);
+    font-weight: 400;
+}
+#player_a_la_une>div>div>div>legend{
+    padding: 12% 0;
+    font-weight: 500;
+    font-size: clamp(0.1rem, 2vw, 1.5rem);
+    
+    color: var(--pink);
+}
+#dernier_match{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5% 0;
+}
+#dernier_match>h2{
+    color: var(--blue);
+}
+.versus{
+    color: var(--blue);
+    font-size: clamp(0.1rem, 2vw, 1.8rem);
+}
+#dernier_match>h3{
+    padding: 5% 0;
+    color: var(--white);
+}
+#dernier_match>h5{
+    color: var(--grey);
+    font-size: clamp(0.01rem, 2vw, 0.8rem);
+}
+#dernier_match>div{
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    padding-bottom: 2%;
+}
+#dernier_match>div>#first_team{
+    border: solid 2px var(--green);
+    padding: 3%;
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    margin-right: 2%;
+}
+#dernier_match>div>#second_team{
+    margin-left: 2%;
+    border: solid 2px var(--darkGrey);
+    padding: 3%;
+    width: 35%;
+    display: flex;
+    justify-content: center;
+}
+#dernier_match>div>#first_team>img, #dernier_match>div>#second_team>img{
+    width: 50%;
+}
+#matchs{
+    text-align: center;
+    color: var(--blue);
+}
+#matchs>h2{
+    text-decoration: none;
+    color: var(--blue);
+    font-size: clamp(0.01rem, 4vw, 2.5rem);
+}
+#matchs>div>h3{
+    margin-top: 5%;
+    font-size: clamp(0.01rem, 2vw, 1.35rem);
+}
+#matchs>div>h5{
+    color: var(--grey);
+    font-size: clamp(0.01rem, 2vw, 0.8rem);
+    margin: 3% 0;
 }

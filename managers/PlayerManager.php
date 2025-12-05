@@ -5,6 +5,18 @@ class PlayerManager extends AbstractManager{
     public function __construct(){
         parent::__construct();
     }
+    
+    // public function create(Player $player)
+    // {
+    //     $query = $this->db->prepare('INSERT INTO players (nickname, bio, portrait, team) VALUES(:nickname, :bio, :portrait, :team)');
+    //     $parameters = [
+    //         'nickname' => $player->getNickname(),
+    //         'bio' => $player->getBio(),
+    //         'portrait' => $player->getPortrait(),
+    //         'team' => $player->getTeam()
+    //     ];
+    //     $query->execute($parameters);
+    // }
 
     // public function update(Player $player) : Player {
     //     $query = $this->db->prepare("UPDATE players SET nickname=:nickname, bio=:bio, portrait=:portrait, team=:team WHERE id=:id");

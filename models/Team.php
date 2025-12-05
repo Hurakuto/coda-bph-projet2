@@ -38,7 +38,7 @@ class Team {
         $this->id = $id;
     }
 
-    public function getPlayers(){
+    public function getPlayers(): array{
         return $this->players;
     }
 

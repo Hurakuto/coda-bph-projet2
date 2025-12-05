@@ -1,1 +1,19 @@
-
+<section id="matchs">
+    <!-- boucle for php -->
+    <h2>LES MATCHS</h2>
+    <?php
+        $media_m = new MediaManager();
+        $game_m = new GameManager();
+        $last_game = $game_m->findLast();
+        $last_game->setLoser();
+    ?>
+    <div>
+        <h3 class="versus">VENDETTA VS OWLS</h3>
+        <h5>13/01/2024</h5>
+        <div>
+            <img src="" alt="">
+            <img src="" alt="">
+        </div>
+        <div><a href="">DÉTAILS DU MATCH</a></div>
+    </div>
+</section>

@@ -1,14 +1,14 @@
 <?php
 
-class MediaManager extends AbstractManager{
+class GameManager extends AbstractManager{
 
     public function __construct(){
         parent::__construct();
     }
     
-    // public function create(Media $media)
+    // public function create(Game $game)
     // {
-    //     $query = $this->db->prepare('INSERT INTO media (url, alt) VALUES(:url, :alt)');
+    //     $query = $this->db->prepare('INSERT INTO games (url, alt) VALUES(:url, :alt)');
     //     $parameters = [
     //         'url' => $media->getUrl(),
     //         'alt' => $media->getAlt()
@@ -41,8 +41,8 @@ class MediaManager extends AbstractManager{
     //     $query->execute($parameters);
     // }
 
-    public function findOne(int $id) : Media {
-        $query = $this->db->prepare("SELECT * FROM media WHERE id=:id");
+    public function findOne(int $id) : Game {
+        $query = $this->db->prepare("SELECT * FROM games WHERE id=:id");
         $parameters = [
             "id" => $id
         ];
@@ -50,16 +50,26 @@ class MediaManager extends AbstractManager{
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
         
-        $media = new Media($result['url'], $result['alt'], $result['id']);
+        $game = new Game($result['name'], $result['date'], $result['team_1'], $result['team_2'], $result['winner'], $result['id']);
 
-        return $media;
+        return $game;
     }
 
     public function findAll() : array {
-        $query = $this->db->prepare("SELECT * FROM media");
+        $query = $this->db->prepare("SELECT * FROM games");
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $results;
+    }
+
+    public function findLast() : Game {
+        $query = $this->db->prepare("SELECT * FROM games ORDER BY id DESC LIMIT 1");
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        $game = new Game($result['name'], DateTime::createFromFormat('Y-m-d H:i:s', $result["date"]), $result['team_1'], $result['team_2'], $result['winner'], $result['id']);
+        
+        return $game;
     }
 }
