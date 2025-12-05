@@ -1,0 +1,57 @@
+<?php
+
+class PlayerManager extends AbstractManager{
+
+    public function __construct(){
+        parent::__construct();
+    }
+
+    public function update(Player $player) : Player {
+        $query = $this->db->prepare("UPDATE players SET nickname=:nickname, bio=:bio, portrait=:portrait, team=:team WHERE id=:id");
+        $parameters = [
+            'id' => $player->getId(),
+            'nickname' => $player->getNickname(),
+            'bio' => $player->getBio(),
+            'portrait' => $player->getPortrait(),
+            'team' =>> $player->getTeam()
+        ];
+
+        $query->execute($parameters);
+
+        $player = new Player($player->getNickname(), $player->getBio(), $player->getPortrait(), $player->getTeam(), $player->getId());
+
+        return $player;
+
+    }
+
+    public function delete(player $player) : void {
+        $query = $this->db->prepare("DELETE FROM players WHERE id=:id");
+        $parameters = [
+            "id" => $player->getId()
+        ];
+
+        $query->execute($parameters);
+    }
+
+    public function findOne(int $id) : Player {
+        $query = $this->db->prepare("SELECT * FROM players WHERE id=:id");
+        $parameters = [
+            "id" => $id
+        ];
+
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        
+        $player = new Player($result['firstName'], $result['lastName'], $result['email'], $result['password'], new DateTime($result['created_at']));
+
+        return $player;
+    }
+
+    public function findAll() : array {
+        $query = $this->db->prepare("SELECT * FROM players");
+        $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+    }
+}

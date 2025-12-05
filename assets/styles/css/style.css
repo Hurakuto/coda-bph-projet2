@@ -1,0 +1,52 @@
+:root{
+    --darkerGrey : #0b132b;
+    --darkGrey : #1c2541;
+    --yellow : #d4b52f;
+    --green: #509d77;
+    --pink : #d:97ab5;
+    --blue : #45a0ec;
+    --purple : #9e87cb;
+    --red : #d66f75;
+    --grey : #83a1bb;
+    --white : #ffffff;
+    color: white;
+    font-family: 'Roboto', 'Ubuntu';
+}
+*{
+    margin: 0%;
+}
+
+body {
+    background-color: var(--darkerGrey);
+}
+
+::-webkit-scrollbar{
+    width: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--white);
+}
+
+header>div>a>h1{
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 2%;
+}
+header>#nav{
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 2%;
+    list-style: none;
+}
+
+main>#background{
+    position: absolute;
+    margin: 0%;
+    width: 100%;
+    z-index: -1;
+}
+main>#text>h2, main>#text>h3{
+    text-align: center;
+}
