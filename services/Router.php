@@ -10,13 +10,25 @@ class Router {
                 if($get['route']==='matchs'){
                     $main_c->matchs();
                 }
+                
+                else if($get['route']==='match'){
+                    $main_c->match();
+                }
 
                 else if($get['route']==='players'){
                     $main_c->players();
                 }
+                
+                else if($get['route']==='player'){
+                    $main_c->player();
+                }
 
                 else if($get['route']==='teams'){
                     $main_c->teams();
+                }
+                
+                else if($get['route']==='team'){
+                    $main_c->team();
                 }
             }
 

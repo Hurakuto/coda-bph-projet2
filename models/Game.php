@@ -6,6 +6,14 @@ class Game {
 
     public function __construct(private string $name, private DateTime $date, private int $team_1, private int $team_2, private int $winner, private int $id){}
 
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($id){
+        $this->id = $id;
+    }
+
     public function getName() : string{
         return $this->name;
     }

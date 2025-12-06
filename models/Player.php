@@ -2,9 +2,21 @@
 
 class Player {
 
-    
+    private array $stats = [];
 
     public function __construct(private string $nickname, private string $bio, private int $portrait, private int $team, private ?int $id=NULL){}
+
+    public function getStats(){
+        return $this->stats;
+    }
+
+    public function setStats($stats){
+        $this->stats = $stats;
+    }
+
+    public function addStats($stats){
+        $this->stats[] = $stats;
+    }
 
     public function getNickname(){
         return $this->nickname;

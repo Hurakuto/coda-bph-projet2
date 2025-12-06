@@ -20,9 +20,9 @@ class DefaultController extends AbstractController
         $team_m->addPlayers($team);
 
         $team_players = [];
-        foreach($team->getPlayers() as $player){
+        foreach ($team->getPlayers() as $player) {
             $team_players[] = [
-                "name" => $player->getNickname(),
+                "name" => mb_strtoupper($player->getNickname(), 'UTF-8'),
                 "portrait_url" => $media_m->findOne($player->getPortrait())->getUrl(),
                 "portrait_alt" => $media_m->findOne($player->getPortrait())->getAlt()
             ];
@@ -32,10 +32,10 @@ class DefaultController extends AbstractController
         // Partie Joueurs à la une
         $joueurs = [3, 14, 12];
         $top_players = [];
-        foreach($joueurs as $id_joueur){
+        foreach ($joueurs as $id_joueur) {
             $joueur = $player_m->findOne($id_joueur);
             $top_players[] = [
-                "name" => $joueur->getNickname(),
+                "name" => mb_strtoupper($joueur->getNickname(), "UTF-8"),
                 "portrait_url" => $media_m->findOne($joueur->getPortrait())->getUrl(),
                 "portrait_alt" => $media_m->findOne($joueur->getPortrait())->getAlt(),
                 "team_name" => $team_m->findOne($joueur->getTeam())->getName()
@@ -61,7 +61,7 @@ class DefaultController extends AbstractController
                 ],
                 'players' => $top_players,
                 'match' => [
-                    'name' => $last_game->getName(),
+                    'name' => mb_strtoupper($last_game->getName(), "UTF-8"),
                     'date' => $last_game->getDate()->format("d/m/Y"),
                     'teams' => [
                         'winner' => [
@@ -80,16 +80,191 @@ class DefaultController extends AbstractController
 
     public function teams()
     {
-        $this->render('_teams', []);
+        $media_m = new MediaManager();
+        $player_m = new PlayerManager();
+        $team_m = new TeamManager();
+        $game_m = new GameManager();
+
+        // 
+        $teams = $team_m->findAll();
+        $all_teams = [];
+        foreach($teams as $team){
+            $all_teams[] = 
+            [
+                "id" => $team['id'],
+                "name" => mb_strtoupper($team['name'], 'UTF-8'),
+                "desc" => $team['description'],
+                'logo_url' => $media_m->findOne($team_m->findOne($team['id'])->getLogo())->getUrl(),
+                'logo_alt' => $media_m->findOne($team_m->findOne($team['id'])->getLogo())->getAlt()
+            ];
+        }
+        // 
+
+        $this->render('_teams', $all_teams);
+    }
+
+    public function team()
+    {
+        $media_m = new MediaManager();
+        $player_m = new PlayerManager();
+        $team_m = new TeamManager();
+        $game_m = new GameManager();
+
+        // 
+        $id = $_GET['id'];
+
+        $team = $team_m->findOne($id);
+        $team_m->addPlayers($team);
+
+        $players = [];
+
+        foreach($team->getPlayers() as $player){
+            $players[] = [
+                "id" => $player->getId(),
+                "name" => mb_strtoupper($player->getNickname(), 'UTF-8'),
+                "portrait_url" => $media_m->findOne($player->getPortrait())->getUrl(),
+                "portrait_alt" => $media_m->findOne($player->getPortrait())->getAlt()
+            ];
+        }
+        // 
+
+        $this->render(
+            '_team', 
+            [
+                "name" => mb_strtoupper($team->getName(), 'UTF-8'),
+                "players" => $players
+            ]
+        );
     }
 
     public function players()
     {
-        $this->render('_players', []);
+        $media_m = new MediaManager();
+        $player_m = new PlayerManager();
+        $team_m = new TeamManager();
+        $game_m = new GameManager();
+
+        // 
+        $players = $player_m->findAll();
+
+        $all_players = [];
+        foreach($players as $player){
+            $all_players[] = [
+                "id" => $player['id'],
+                "name" => mb_strtoupper($player['nickname'], 'UTF-8'),
+                "portrait_url" => $media_m->findOne($player['portrait'])->getUrl(),
+                "portrait_alt" => $media_m->findOne($player['portrait'])->getAlt(),
+                "team_name" => mb_strtoupper($team_m->findOne($player['team'])->getName(), 'UTF-8')
+            ];
+        }
+        // 
+
+        $this->render('_players', $all_players);
+    }
+
+    public function player()
+    {
+        $this->render('_player', []);
     }
 
     public function matchs()
     {
-        $this->render('_matchs', []);
+
+        $media_m = new MediaManager();
+        $player_m = new PlayerManager();
+        $team_m = new TeamManager();
+        $game_m = new GameManager();
+
+        // 
+        $games = $game_m->findAll();
+        $all_games = [];
+        foreach ($games as $game) {
+            $game = $game_m->findOne($game['id']);
+            $game->setLoser();
+            if ($game->getTeam1() === $game->getWinner()) {
+                $bool = 'True';
+                $bool2 = 'False';
+            } else {
+                $bool = 'False';
+                $bool2 = 'True';
+            }
+            $all_games[$game->getId()] = [
+                "id" => $game->getId(),
+                "name" => mb_strtoupper($game->getName(), 'UTF-8'),
+                "date" => $game->getDate()->format("d/m/Y"),
+                'teams' => [
+                    'team1' => [
+                        'win' => $bool,
+                        'logo_url' => $media_m->findOne($team_m->findOne($game->getTeam1())->getLogo())->getUrl(),
+                        'logo_alt' => $media_m->findOne($team_m->findOne($game->getTeam1())->getLogo())->getAlt()
+                    ],
+                    'team2' => [
+                        'win' => $bool2,
+                        'logo_url' => $media_m->findOne($team_m->findOne($game->getTeam2())->getLogo())->getUrl(),
+                        'logo_alt' => $media_m->findOne($team_m->findOne($game->getTeam2())->getLogo())->getAlt()
+                    ]
+                ]
+            ];
+
+        }
+        // 
+
+        $this->render('_matchs', $all_games);
+    }
+
+    public function match()
+    {
+        $media_m = new MediaManager();
+        $player_m = new PlayerManager();
+        $team_m = new TeamManager();
+        $game_m = new GameManager();
+
+        $id = $_GET['id'];
+
+        $game = $game_m->findOne($id);
+        $game->setLoser();
+        if ($game->getTeam1() === $game->getWinner()) {
+            $bool = 'True';
+            $bool2 = '';
+        } else {
+            $bool = '';
+            $bool2 = 'True';
+        }
+
+        $players = $game_m->findPlayers($game->getId());
+        $all_players = [];
+
+        foreach ($players as $player) {
+            $player_m->addPerformances($player, $game->getId());
+            $all_players[] = [
+                'id' => $player->getId(),
+                'name' => $player->getNickname(),
+                'team' => $team_m->findOne($player->getTeam())->getName(),
+                'stats' => $player->getStats()
+            ];
+        }
+
+        $this->render(
+            '_match',
+            [
+                "id" => $game->getId(),
+                "name" => mb_strtoupper($game->getName(), 'UTF-8'),
+                "date" => $game->getDate()->format("d/m/Y"),
+                'teams' => [
+                    'team1' => [
+                        'win' => $bool,
+                        'logo_url' => $media_m->findOne($team_m->findOne($game->getTeam1())->getLogo())->getUrl(),
+                        'logo_alt' => $media_m->findOne($team_m->findOne($game->getTeam1())->getLogo())->getAlt()
+                    ],
+                    'team2' => [
+                        'win' => $bool2,
+                        'logo_url' => $media_m->findOne($team_m->findOne($game->getTeam2())->getLogo())->getUrl(),
+                        'logo_alt' => $media_m->findOne($team_m->findOne($game->getTeam2())->getLogo())->getAlt()
+                    ]
+                ],
+                "players" => $all_players
+
+            ]
+        );
     }
 }

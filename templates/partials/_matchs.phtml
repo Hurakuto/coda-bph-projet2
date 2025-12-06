@@ -1,19 +1,16 @@
 <section id="matchs">
-    <!-- boucle for php -->
     <h2>LES MATCHS</h2>
     <?php
-        $media_m = new MediaManager();
-        $game_m = new GameManager();
-        $last_game = $game_m->findLast();
-        $last_game->setLoser();
+        foreach($data as $game){
     ?>
-    <div>
-        <h3 class="versus">VENDETTA VS OWLS</h3>
-        <h5>13/01/2024</h5>
-        <div>
-            <img src="" alt="">
-            <img src="" alt="">
+    <div class="match">
+        <h3 class="versus"><?= $game['name'] ?></h3>
+        <h5><?= $game['date'] ?></h5>
+        <div class="logo">
+            <img class="<?= $game['teams']['team1']['win'] ?>" src="<?= $game['teams']['team1']['logo_url'] ?>" alt="<?= $game['teams']['team1']['logo_alt'] ?>">
+            <img class="<?= $game['teams']['team2']['win'] ?>" src="<?= $game['teams']['team2']['logo_url'] ?>" alt="<?= $game['teams']['team2']['logo_alt'] ?>">
         </div>
-        <div><a href="">DÉTAILS DU MATCH</a></div>
+        <div class="button_match" ><a href="?route=match&id=<?= $game['id'] ?>">DÉTAILS DU MATCH</a></div>
     </div>
+    <?php } ?>
 </section>

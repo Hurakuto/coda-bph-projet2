@@ -1,1 +1,30 @@
+<div class="match_result">
+    <h3 class="versus"><?= $data['name'] ?></h3>
+    <h5><?= $data['date'] ?></h5>
+    <div class="logo">
+        <img class="<?= $data['teams']['team1']['win'] ?>" src="<?= $data['teams']['team1']['logo_url'] ?>"
+            alt="<?= $data['teams']['team1']['logo_alt'] ?>">
+        <img class="<?= $data['teams']['team2']['win'] ?>" src="<?= $data['teams']['team2']['logo_url'] ?>"
+            alt="<?= $data['teams']['team2']['logo_alt'] ?>">
+    </div>
+</div>
+<div class="performance">
+    <h2>LES PERFORMANCES</h2>
+    <table>
+        <tr>
+            <td>PLAYER</td>
+            <td>TEAM</td>
+            <td>POINTS</td>
+            <td>ASSISTS</td>
+        </tr>
 
+        <?php foreach ($data['players'] as $player) { ?>
+            <tr>
+                <td class="pink"><?= $player['name'] ?></td>
+                <td class="yellow"><?= $player['team'] ?></td>
+                <td><?= !empty($player['stats']) ? $player['stats'][0]['points'] : '-' ?></td>
+                <td><?= !empty($player['stats']) ? $player['stats'][0]['assists'] : '-' ?></td>
+            </tr>
+        <?php } ?>
+    </table>
+</div>

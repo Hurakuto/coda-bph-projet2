@@ -1,1 +1,12 @@
+<h3></h3>
 
+<div>
+    <?php foreach($data as $player){ ?>
+        <div>
+            <img src="<?= $player['portrait_url'] ?>" alt="<?= $player['portrait_alt'] ?>">
+            <p><?= $player['name'] ?></p>
+            <p><?= $player['team_name'] ?></p>
+            <div><a href='?route=player&id=<?= $player['id'] ?>'>DÉCOUVREZ <?= $player['name'] ?></a></div>
+        </div>
+    <?php } ?>
+</div>
