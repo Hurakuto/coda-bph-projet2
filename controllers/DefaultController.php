@@ -354,7 +354,6 @@ class DefaultController extends AbstractController
                     ]
                 ],
                 "players" => $all_players
-
             ]
         );
     }
