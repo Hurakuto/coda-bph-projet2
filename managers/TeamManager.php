@@ -77,7 +77,7 @@ class TeamManager extends AbstractManager
 
     public function findAll(): array
     {
-        $query = $this->db->prepare("SELECT * FROM teams");
+        $query = $this->db->prepare("SELECT * FROM teams ORDER BY name ASC");
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_ASSOC);
 

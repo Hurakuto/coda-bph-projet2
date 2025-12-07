@@ -45,7 +45,7 @@ class GameManager extends AbstractManager
 
     public function findPlayers(int $id)
     {
-        $query = $this->db->prepare("SELECT players.id as player_id, players.nickname, players.bio, players.portrait, players.team FROM teams JOIN players ON players.team = teams.id JOIN player_performance ON player_performance.player = players.id JOIN games ON player_performance.game = games.id WHERE games.id=:id ORDER BY teams.name ASC");
+        $query = $this->db->prepare("SELECT players.id as player_id, players.nickname, players.bio, players.portrait, players.team FROM teams JOIN players ON players.team = teams.id JOIN player_performance ON player_performance.player = players.id JOIN games ON player_performance.game = games.id WHERE games.id=:id ORDER BY teams.name, players.nickname ASC");
         $parameters = [
             "id" => $id
         ];

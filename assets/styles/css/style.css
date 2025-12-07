@@ -61,7 +61,10 @@ main>#text>h2{
     color: var(--white);
     text-decoration: none;
 }
-
+main>#text>h3{
+    font-family: 'Roboto';
+    font-weight: 400;
+}
 #team_a_la_une{
     background-color: var(--darkerGrey);
     z-index: 1;
@@ -288,6 +291,10 @@ h2{
 .match_result>.logo>.True{
     border: solid 3px var(--green);
 }
+.performance>table{
+    font-family: 'Roboto';
+    font-weight: 600;
+}
 .performance>h2{
     color: var(--purple);
     text-decoration: none;
@@ -357,11 +364,15 @@ td{
 }
 #teams>div>div>h5{
     margin: 3% 0;
+    font-family: 'Roboto';
+    font-weight: 600;
 }
 #teams>div>div>h3, #teams>div>div>h5{
     text-align: center;
 }
 #teams>div>div>div{
+    font-family: 'Roboto';
+    font-weight: 600;
     border: solid 2px var(--yellow);
     border-radius: 8px; width: 70%;
     text-align: center;
@@ -563,14 +574,18 @@ td{
 }
 #player_section>#table>table{
     display: flex;
-    justify-content: center;
+    border: solid 1px rgba(131, 161, 187, 0.2);
+    height: 20vw;
+    align-items: start;
 }
 #player_section>#table>table>tbody>tr{
     width: 100%;
     margin: 0;
-}   
-#player_section>#table>table>tbody tr:nth-last-child(1){
-    padding-bottom: 25%;
+    border: none;
+}
+#player_section>#table>table>tbody>tr:first-child>td{
+    border: solid 1px rgba(131, 161, 187, 0.2);
+    border-right: none; border-left: none;
 }
 #player_section>#table>table>tbody>.stat>.team_adverse{
     color: var(--yellow);
@@ -583,4 +598,10 @@ td{
 }
 #player_section>#table>table>tr>td{
     text-align: center;
+}
+#erreur{
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: 'Roboto'; font-weight: 900;
+    margin: 10%;
 }

@@ -1,11 +1,13 @@
 <?php
 
-class MediaManager extends AbstractManager{
+class MediaManager extends AbstractManager
+{
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
     }
-    
+
     // public function create(Media $media)
     // {
     //     $query = $this->db->prepare('INSERT INTO media (url, alt) VALUES(:url, :alt)');
@@ -41,7 +43,8 @@ class MediaManager extends AbstractManager{
     //     $query->execute($parameters);
     // }
 
-    public function findOne(int $id) : Media {
+    public function findOne(int $id): Media
+    {
         $query = $this->db->prepare("SELECT * FROM media WHERE id=:id");
         $parameters = [
             "id" => $id
@@ -49,13 +52,14 @@ class MediaManager extends AbstractManager{
 
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        
+
         $media = new Media($result['url'], $result['alt'], $result['id']);
 
         return $media;
     }
 
-    public function findAll() : array {
+    public function findAll(): array
+    {
         $query = $this->db->prepare("SELECT * FROM media");
         $query->execute();
         $results = $query->fetchAll(PDO::FETCH_ASSOC);

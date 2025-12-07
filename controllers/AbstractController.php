@@ -1,8 +1,10 @@
 <?php
 
-abstract class AbstractController {
+abstract class AbstractController
+{
 
-    public function render(string $template, array $data): void {
+    public function render(string $template, array $data): void
+    {
         require 'templates/layout.phtml';
     }
 }

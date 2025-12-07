@@ -1,43 +1,45 @@
 <?php
 
-class Router {
+class Router
+{
 
-    public function handleRequest(array $get): void {
+    public function handleRequest(array $get): void
+    {
         $main_c = new DefaultController();
 
-        if(!empty($get)){
-            if(isset($get['route'])){
-                if($get['route']==='matchs'){
+        if (!empty($get)) {
+            if (isset($get['route'])) {
+                if ($get['route'] === 'matchs') {
                     $main_c->matchs();
-                }
-                
-                else if($get['route']==='match'){
-                    $main_c->match();
-                }
-
-                else if($get['route']==='players'){
+                } elseif ($get['route'] === 'match') {
+                    if (isset($get['id'])) {
+                        $main_c->match();
+                    } else {
+                        $main_c->error_404();
+                    }
+                } elseif ($get['route'] === 'players') {
                     $main_c->players();
-                }
-                
-                else if($get['route']==='player'){
-                    $main_c->player();
-                }
-
-                else if($get['route']==='teams'){
+                } elseif ($get['route'] === 'player') {
+                    if (isset($get['id'])) {
+                        $main_c->player();
+                    } else {
+                        $main_c->error_404();
+                    }
+                } elseif ($get['route'] === 'teams') {
                     $main_c->teams();
+                } elseif ($get['route'] === 'team') {
+                    if (isset($get['id'])) {
+                        $main_c->team();
+                    } else {
+                        $main_c->error_404();
+                    }
+                } else {
+                    $main_c->error_404();
                 }
-                
-                else if($get['route']==='team'){
-                    $main_c->team();
-                }
-            }
-
-            else{
+            } else {
                 $main_c->home();
             }
-        }
-
-        else{
+        } else {
             $main_c->home();
         }
     }

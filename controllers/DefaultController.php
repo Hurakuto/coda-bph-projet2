@@ -88,15 +88,15 @@ class DefaultController extends AbstractController
         // 
         $teams = $team_m->findAll();
         $all_teams = [];
-        foreach($teams as $team){
-            $all_teams[] = 
-            [
-                "id" => $team['id'],
-                "name" => mb_strtoupper($team['name'], 'UTF-8'),
-                "desc" => $team['description'],
-                'logo_url' => $media_m->findOne($team_m->findOne($team['id'])->getLogo())->getUrl(),
-                'logo_alt' => $media_m->findOne($team_m->findOne($team['id'])->getLogo())->getAlt()
-            ];
+        foreach ($teams as $team) {
+            $all_teams[] =
+                [
+                    "id" => $team['id'],
+                    "name" => mb_strtoupper($team['name'], 'UTF-8'),
+                    "desc" => $team['description'],
+                    'logo_url' => $media_m->findOne($team_m->findOne($team['id'])->getLogo())->getUrl(),
+                    'logo_alt' => $media_m->findOne($team_m->findOne($team['id'])->getLogo())->getAlt()
+                ];
         }
         // 
 
@@ -118,7 +118,7 @@ class DefaultController extends AbstractController
 
         $players = [];
 
-        foreach($team->getPlayers() as $player){
+        foreach ($team->getPlayers() as $player) {
             $players[] = [
                 "id" => $player->getId(),
                 "name" => mb_strtoupper($player->getNickname(), 'UTF-8'),
@@ -129,7 +129,7 @@ class DefaultController extends AbstractController
         // 
 
         $this->render(
-            '_team', 
+            '_team',
             [
                 "name" => mb_strtoupper($team->getName(), 'UTF-8'),
                 "players" => $players
@@ -148,7 +148,7 @@ class DefaultController extends AbstractController
         $players = $player_m->findAll();
 
         $all_players = [];
-        foreach($players as $player){
+        foreach ($players as $player) {
             $all_players[] = [
                 "id" => $player['id'],
                 "name" => mb_strtoupper($player['nickname'], 'UTF-8'),
@@ -180,48 +180,52 @@ class DefaultController extends AbstractController
         $equipe = NULL;
         $var = '';
 
-        foreach($games as $game){
+        foreach ($games as $game) {
 
-            if($game['team_1']===$game['winner']){
+            if ($game['team_1'] === $game['winner']) {
                 $equipe = 1;
-            }
-            else{
-                $equipe=2;
+            } else {
+                $equipe = 2;
             }
 
-            if($game['team_1'] === $_player->getTeam()){
+            if ($game['team_1'] === $_player->getTeam()) {
                 $player_m->addPerformances($_player, $game['id']);
 
-                if($equipe===1){
+                if ($equipe === 1) {
                     $var = 'Oui';
-                }
-                else{
+                } else {
                     $var = 'Non';
                 }
 
-                $player_games[] = 
-                [
-                    "adverse" => $team_m->findOne($game['team_2'])->getName(),
-                    "stats" => $_player->getStats(),
-                    "win" => $var
-                ];
-            }
-            else if($game['team_2'] === $_player->getTeam()){
-            $player_m->addPerformances($_player, $game['id']);
+                $stats = $_player->getStats();
+                $current_stats = end($stats); //Pour la fonction end() : https://www.w3schools.com/php/func_array_end.asp
 
-                if($equipe===1){
+                $player_games[] =
+                    [
+                        "adverse" => $team_m->findOne($game['team_2'])->getName(),
+                        "points" => $current_stats['points'],
+                        "assists" => $current_stats['assists'],
+                        "win" => $var
+                    ];
+            } elseif ($game['team_2'] === $_player->getTeam()) {
+                $player_m->addPerformances($_player, $game['id']);
+
+                if ($equipe === 1) {
                     $var = 'Non';
-                }
-                else{
+                } else {
                     $var = 'Oui';
                 }
 
-                $player_games[] = 
-                [
-                    "adverse" => $team_m->findOne($game['team_1'])->getName(),
-                    "stats" => $_player->getStats(),
-                    "win" => $var
-                ];
+                $stats = $_player->getStats();
+                $current_stats = end($stats);
+
+                $player_games[] =
+                    [
+                        "adverse" => $team_m->findOne($game['team_1'])->getName(),
+                        "points" => $current_stats['points'],
+                        "assists" => $current_stats['assists'],
+                        "win" => $var
+                    ];
             }
         }
 
@@ -230,26 +234,26 @@ class DefaultController extends AbstractController
 
         $mates = [];
 
-        foreach($player_team->getPlayers() as $player){
-            $mates[] = 
-            [
-                "id" => $player->getId(),
-                "name" => mb_strtoupper($player->getNickname(), 'UTF-8'),
-                "portrait_url" => $media_m->findOne($player->getPortrait())->getUrl(),
-                "portrait_alt" => $media_m->findOne($player->getPortrait())->getAlt()
-            ];
+        foreach ($player_team->getPlayers() as $player) {
+            $mates[] =
+                [
+                    "id" => $player->getId(),
+                    "name" => mb_strtoupper($player->getNickname(), 'UTF-8'),
+                    "portrait_url" => $media_m->findOne($player->getPortrait())->getUrl(),
+                    "portrait_alt" => $media_m->findOne($player->getPortrait())->getAlt()
+                ];
         }
         // 
 
-        $player_info = 
-        [
-            "id" => $_player->getId(),
-            "name" => mb_strtoupper($_player->getNickname(), 'UTF-8'),
-            "portrait_url" => $media_m->findOne($_player->getPortrait())->getUrl(),
-            "portrait_alt" => $media_m->findOne($_player->getPortrait())->getAlt(),
-            "matchs" => $player_games,
-            "mates" => $mates
-        ];
+        $player_info =
+            [
+                "id" => $_player->getId(),
+                "name" => mb_strtoupper($_player->getNickname(), 'UTF-8'),
+                "portrait_url" => $media_m->findOne($_player->getPortrait())->getUrl(),
+                "portrait_alt" => $media_m->findOne($_player->getPortrait())->getAlt(),
+                "matchs" => $player_games,
+                "mates" => $mates
+            ];
 
         $this->render('_player', $player_info);
     }
@@ -353,5 +357,9 @@ class DefaultController extends AbstractController
 
             ]
         );
+    }
+
+    public function error_404(){
+        $this->render('_404', []);
     }
 }

@@ -12,35 +12,34 @@
                 <td>ASSITS</td>
                 <td>VICTOIRE ?</td>
             </tr>
-            <?php 
-            $i = 0;
-            foreach($data["matchs"] as $match){ 
-            ?>
-            <tr class="stat">
-                <td class="team_adverse"><?= $match['adverse'] ?></td>
-                <td><?= $match['stats'][$i]['points'] ?></td>
-                <td><?= $match['stats'][$i]['assists'] ?></td>
-                <td class='<?= $match['win'] ?>'><?= $match['win'] ?></td>
-            </tr>
-            <?php 
-                $i++;
-            } 
+            <?php
+            foreach ($data["matchs"] as $match) {
+                ?>
+                <tr class="stat">
+                    <td class="team_adverse"><?= $match['adverse'] ?></td>
+                    <td><?= $match['points'] ?></td>
+                    <td><?= $match['assists'] ?></td>
+                    <td class='<?= $match['win'] ?>'><?= $match['win'] ?></td>
+                </tr>
+                <?php
+            }
             ?>
         </table>
     </div>
     <div id="sa_team">
         <h3>SA TEAM</h3>
         <div>
-        <?php 
-        foreach($data['mates'] as $player){
-            if($player['id']!=$data['id']){ 
-        ?>
-        <div>
-            <img src="<?= $player['portrait_url'] ?>" alt="<?= $player['portrait_alt'] ?>">
-            <h4><?= $player['name'] ?></h4>
-            <div><a href="?route=player&id=<?= $player['id'] ?>">DÉCOUVREZ <?= $player['name'] ?></a></div>
-        </div>
-        <?php }} ?>
+            <?php
+            foreach ($data['mates'] as $player) {
+                if ($player['id'] != $data['id']) {
+                    ?>
+                    <div>
+                        <img src="<?= $player['portrait_url'] ?>" alt="<?= $player['portrait_alt'] ?>">
+                        <h4><?= $player['name'] ?></h4>
+                        <div><a href="?route=player&id=<?= $player['id'] ?>">DÉCOUVREZ <?= $player['name'] ?></a></div>
+                    </div>
+                <?php }
+            } ?>
         </div>
     </div>
 </section>
