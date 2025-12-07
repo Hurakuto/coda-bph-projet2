@@ -40,6 +40,8 @@ header>#nav{
     justify-content: space-evenly;
     padding-bottom: 2%;
     list-style: none;
+    font-family: 'Roboto';
+    font-weight: 400;
 }
 
 main>#background{
@@ -407,4 +409,178 @@ td{
     font-family: 'Roboto';
     font-size: 0.9rem;
 
+}
+#h2_players{
+    color: var(--pink);
+    text-decoration: none;
+    font-size: 2.5rem;
+}
+#players{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 8%;
+}
+#players>div{
+    width: 25%;
+    margin: 4% 1.5%;
+    margin-bottom: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#players>div>img{
+    width: 100%;
+}
+#players>div>h4{
+    color: var(--pink);
+    margin-top: 4%;
+    font-size: 1.9rem;
+    font-weight: 800;
+}
+#players>div>p{
+    color: var(--yellow);
+    text-align: center;
+    font-family: 'Roboto';
+    font-size: 1.2rem;
+    margin: 5% 0;
+}
+#players>div>div{
+    border: solid 2px var(--pink);
+    color: var(--pink);
+    border-radius: 8px; width: auto;
+    text-align: center;
+    padding: 3% 5%;
+    margin-bottom: 0%;
+}
+#players>div>div>a{
+    font-family: 'Roboto';
+    font-size: 0.9rem;
+    color: var(--pink);
+}
+#player_section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#player_section>#joueur{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4%;
+}
+#player_section>#joueur>h2{
+    color: var(--pink);
+    font-weight: 800;
+    font-size: 2.5rem;
+    text-decoration: none;
+    margin-bottom: 2%;
+}
+#player_section>#joueur>img{
+    width: 35%;
+    margin-bottom: 6%;
+}
+#player_section>#joueur>h3{
+    color: var(--blue);
+    font-size: 1.8rem;
+}
+#player_section>#joueur>h2, #player_sectiob>#joueur>h3{
+    text-align: center;
+}
+#player_section>#sa_team>h3{
+    color: var(--yellow);
+    font-size: 2rem;
+    font-weight: 800;
+    text-align: center;
+    margin: 3% 0;
+}
+#player_section>#sa_team>div{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+}
+#player_section>#sa_team>div>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 2%;
+    width: 25%;
+}
+#player_section>#sa_team>div>div>img{
+    width: 100%;
+}
+#player_section>#sa_team>div>div>h4{
+    color: var(--pink);
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 4% 0;
+}
+#player_section>#sa_team>div>div>div{
+    border: solid 2px var(--white);
+    color: white;
+    border-radius: 8px; 
+    border-width: 1px;
+    width: 50%;
+    height: 10%;
+    text-align: center;
+    padding: 1% 5%;
+    margin-left: 20%;
+    margin-bottom: 10%;
+}
+#player_section>#sa_team>div>div>div>a{
+    font-family: 'Roboto';
+    font-weight: 400;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#player_section>#table{
+    width: 90%;
+    font-family: 'Roboto';
+    font-weight: 400;
+}
+#player_section>#table>table{
+    display: flex;
+    justify-content: center;
+}
+#player_section>#table>table>tbody>tr{
+    width: 100%;
+    margin: 0;
+}   
+#player_section>#table>table>tbody tr:nth-last-child(1){
+    padding-bottom: 25%;
+}
+#player_section>#table>table>tbody>.stat>.team_adverse{
+    color: var(--yellow);
+}
+#player_section>#table>table>tbody>.stat>.Oui{
+    color: var(--green);
+}
+#player_section>#table>table>tbody>.stat>.Non{
+    color: var(--red);
+}
+#player_section>#table>table>tr>td{
+    text-align: center;
 }

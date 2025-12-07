@@ -22,8 +22,8 @@
             <tr>
                 <td class="pink"><?= $player['name'] ?></td>
                 <td class="yellow"><?= $player['team'] ?></td>
-                <td><?= !empty($player['stats']) ? $player['stats'][0]['points'] : '-' ?></td>
-                <td><?= !empty($player['stats']) ? $player['stats'][0]['assists'] : '-' ?></td>
+                <td><?= $player['stats'][0]['points'] ?></td>
+                <td><?= $player['stats'][0]['assists']  ?></td>
             </tr>
         <?php } ?>
     </table>

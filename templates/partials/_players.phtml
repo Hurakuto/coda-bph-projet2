@@ -1,10 +1,10 @@
-<h3></h3>
+<h2 id="h2_players">LES PLAYERS DE LA LEAGUE</h2>
 
-<div>
+<div id="players">
     <?php foreach($data as $player){ ?>
         <div>
             <img src="<?= $player['portrait_url'] ?>" alt="<?= $player['portrait_alt'] ?>">
-            <p><?= $player['name'] ?></p>
+            <h4><?= $player['name'] ?></h4>
             <p><?= $player['team_name'] ?></p>
             <div><a href='?route=player&id=<?= $player['id'] ?>'>DÉCOUVREZ <?= $player['name'] ?></a></div>
         </div>

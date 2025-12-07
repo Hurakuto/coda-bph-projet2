@@ -164,7 +164,94 @@ class DefaultController extends AbstractController
 
     public function player()
     {
-        $this->render('_player', []);
+        $media_m = new MediaManager();
+        $player_m = new PlayerManager();
+        $team_m = new TeamManager();
+        $game_m = new GameManager();
+
+        // 
+        $player_id = $_GET['id'];
+        $_player = $player_m->findOne($player_id);
+
+        $player_games = [];
+
+        $games = $game_m->findAll();
+
+        $equipe = NULL;
+        $var = '';
+
+        foreach($games as $game){
+
+            if($game['team_1']===$game['winner']){
+                $equipe = 1;
+            }
+            else{
+                $equipe=2;
+            }
+
+            if($game['team_1'] === $_player->getTeam()){
+                $player_m->addPerformances($_player, $game['id']);
+
+                if($equipe===1){
+                    $var = 'Oui';
+                }
+                else{
+                    $var = 'Non';
+                }
+
+                $player_games[] = 
+                [
+                    "adverse" => $team_m->findOne($game['team_2'])->getName(),
+                    "stats" => $_player->getStats(),
+                    "win" => $var
+                ];
+            }
+            else if($game['team_2'] === $_player->getTeam()){
+            $player_m->addPerformances($_player, $game['id']);
+
+                if($equipe===1){
+                    $var = 'Non';
+                }
+                else{
+                    $var = 'Oui';
+                }
+
+                $player_games[] = 
+                [
+                    "adverse" => $team_m->findOne($game['team_1'])->getName(),
+                    "stats" => $_player->getStats(),
+                    "win" => $var
+                ];
+            }
+        }
+
+        $player_team = $team_m->findOne($_player->getTeam());
+        $team_m->addPlayers($player_team);
+
+        $mates = [];
+
+        foreach($player_team->getPlayers() as $player){
+            $mates[] = 
+            [
+                "id" => $player->getId(),
+                "name" => mb_strtoupper($player->getNickname(), 'UTF-8'),
+                "portrait_url" => $media_m->findOne($player->getPortrait())->getUrl(),
+                "portrait_alt" => $media_m->findOne($player->getPortrait())->getAlt()
+            ];
+        }
+        // 
+
+        $player_info = 
+        [
+            "id" => $_player->getId(),
+            "name" => mb_strtoupper($_player->getNickname(), 'UTF-8'),
+            "portrait_url" => $media_m->findOne($_player->getPortrait())->getUrl(),
+            "portrait_alt" => $media_m->findOne($_player->getPortrait())->getAlt(),
+            "matchs" => $player_games,
+            "mates" => $mates
+        ];
+
+        $this->render('_player', $player_info);
     }
 
     public function matchs()
