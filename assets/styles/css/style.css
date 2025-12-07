@@ -78,9 +78,9 @@ main>#text>h3{
     color: var(--yellow);
     font-weight: 900;
     font-size: 1.5rem;
-    text-align: center;                /* Meilleur site MDN de doc html css */
-    text-decoration-thickness: 2px; /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-decoration-thickness */
-    text-underline-offset: 10px; /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/text-underline-offset */
+    text-align: center;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 10px; 
 }
 #team_a_la_une>#all{
     margin: 2% 2% 0% 2%;

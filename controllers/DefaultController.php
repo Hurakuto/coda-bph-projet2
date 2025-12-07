@@ -198,7 +198,7 @@ class DefaultController extends AbstractController
                 }
 
                 $stats = $_player->getStats();
-                $current_stats = end($stats); //Pour la fonction end() : https://www.w3schools.com/php/func_array_end.asp
+                $current_stats = end($stats);
 
                 $player_games[] =
                     [
